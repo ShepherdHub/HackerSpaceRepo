@@ -32,16 +32,116 @@ namespace GameOfWar
         #endregion
         static void Main(string[] args)
         {
-            GetPlayerNames();
-            //Pause();
+            /*
+             * Main menu ()
+             * 1. play game
+             * 2. view previous game stats (need to save game stats to file prevGameStats.txt)
+             *      Player 1 Name vs Player 2 Name
+             *      <Winner> won the Game of War
+             *      
+             *      Stats:
+             *      Total Skirmishes
+             *      Total Battles
+             *      Player 1 Name: Skirmishes Won
+             *      Player 2 Name: Skirmishes Won
+             * 3. Options
+             * 4. Exit Game
+             * 
+             *  Options
+             *      1. slow vs fast game
+             *      2. save output to file - Not yet
+             *      3. Stacked Deck -> Double Dead Man's Hand (add: P1 Wins, P2 Wins, P1 Dead Man's Hand, P2 Dead Man's Hand) 
+             *      4. Return to Main Menu
+             * 
+            */
 
+            MainMenu();
+
+            return;
+
+        }
+
+        private static void MainMenu()
+        {
+            Console.Clear();
+            //display menu
+            Console.WriteLine("\t\t\tSteven Shepherd's Marvelous Game Of War\n\n");
+            Console.WriteLine("1. Play Game");
+            Console.WriteLine("2. View Previous Game Stats");
+            Console.WriteLine("3. Options");
+            Console.WriteLine("4. Exit Game");
+            Console.WriteLine("\n\n Select an option by entering the appropriate number...");
+            //wait for input
+            //read input
+            //parse input
+            int choice = selectNumOption(4);
+            Console.WriteLine();
+            //make decision based on input
+            if (choice == -1)
+            {
+                Console.WriteLine("Invalid entry");
+                Pause();
+                MainMenu();
+            }
+
+            switch (choice)
+            {
+                case 1:
+                    PlayGame();
+                    break;
+                case 2:
+                    GameStats();
+                    break;
+                case 3:
+                    OptionMenu();
+                    break;
+                case 4:
+                    return;
+            }
+        }
+
+ 
+
+        private static void OptionMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("The Options Menu has not yet been implemented");
+            Pause();
+            MainMenu();
+        }
+
+        private static void GameStats()
+        {
+            Console.Clear();
+            Console.WriteLine("The Previous Game Stats Screen has not yet been implemented");
+            Pause();
+            MainMenu();
+        }
+
+        private static int selectNumOption(int length)
+        {
+            char input;
+            input = Console.ReadKey().KeyChar;
+            if(char.IsDigit(input))
+            {
+                for(int i = 0; i < length; i++)
+                {
+                    int number = input - '0'; //Get's the value of the character not the ascii number
+                    if (number == i + 1) return i + 1;
+                }
+            }
+            
+            return -1;
+        }
+
+        private static void PlayGame()
+        {
+            Console.Clear();
+            GetPlayerNames();
+            Console.Clear();
             GetDeck();
             Shuffle(deck);
-
             DealCards();
-
-            //PrintPlayersHands();
-
             do
             {
                 Skirmish();
@@ -49,9 +149,8 @@ namespace GameOfWar
             } while (gameIsRunning);
 
             PrintWinner();
-
             Pause();
-
+            MainMenu();
         }
 
         private static void PrintWinner()
