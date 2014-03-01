@@ -1,12 +1,13 @@
 ﻿
 namespace GameOfWarOOP
 {
-    class Card
+    class PlayingCard
     {
         #region Fields
         private string _fullName;
-        private string _rank;
-        private string _suit;
+        private int _rank;
+        private int _suit;
+        private bool _isFaceUp;
         #endregion
 
         #region Properties
@@ -14,34 +15,43 @@ namespace GameOfWarOOP
         {
             get { return _fullName; }
         }
-        public string Rank
+        public int Rank
         {
             get { return _rank; }
         }
-        public string Suit
+        public int Suit
         {
             get { return _suit; }
+        }
+        public bool IsFaceUp
+        {
+            get { return _isFaceUp; }
         }
 
         #endregion
 
-        public Card(int card)
+        public PlayingCard(int card)
         {
-            _rank = PrintRank(card);
-            _suit = PrintSuit(card);
-            _fullName = _rank + " of " + _suit;
+            _rank = card/13;
+            _suit = card%13;
+            _fullName = PrintRank() + " of " + PrintSuit();
+            _isFaceUp = false;
         }
 
-        private string PrintRank(int card)
+        public void FlipCard()
         {
-            int rank = card / 13;
-            if (rank <= 8)
+            _isFaceUp = !_isFaceUp;
+        }
+
+        private string PrintRank()
+        {
+            if (_rank <= 8)
             {
-                return rank +"";
+                return _rank +"";
             }
             else
             {
-                switch (rank)
+                switch (_rank)
                 {
                     case (9):
                         return "Jack";
@@ -58,10 +68,9 @@ namespace GameOfWarOOP
             }
         }
 
-        private string PrintSuit(int card)
+        private string PrintSuit()
         {
-            int suit = card % 13;
-            switch (suit)
+            switch (_suit)
             {
                 case 0:
                     return "Clubs";
@@ -74,6 +83,13 @@ namespace GameOfWarOOP
                 default:
                     return "No suit found for this card";
             }
+        }
+
+        public int CompareTo(PlayingCard other)
+        {
+            if (this._rank < other._rank) return -1;
+            if (this._rank > other._rank) return 1;
+            return 0;
         }
     }
 }
