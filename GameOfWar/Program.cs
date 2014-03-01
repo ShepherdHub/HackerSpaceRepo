@@ -100,8 +100,6 @@ namespace GameOfWar
             }
         }
 
- 
-
         private static void OptionMenu()
         {
             Console.Clear();
@@ -292,15 +290,12 @@ namespace GameOfWar
         {
             if(player1Score == 0 || player2Score == 0) gameIsRunning = false;
 		}
-    
 
         private static void EvaluateScores()
         {
             player1Score = player1Hand.Count + player1Discard.Count + player1Spoils.Count;
             player2Score = player2Hand.Count + player2Discard.Count + player2Spoils.Count;
         }
-
-
 
         private static void AddSpoilsToDiscard(List<int> discard)
         {
@@ -355,7 +350,6 @@ namespace GameOfWar
                 Console.WriteLine(player2Name + " rehand occured.");
             }
         }
-
 
         private static void GetPlayerNames() 
         {
