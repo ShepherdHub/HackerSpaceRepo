@@ -7,9 +7,9 @@ namespace GameOfWarOOP
     {
         #region Fields
         private string _name;
-        private CardCollection _hand;
-        private CardCollection _discard;
-        private CardCollection _spoils;
+        private CardCollection _hand = new CardCollection();
+        private CardCollection _discard = new CardCollection();
+        private CardCollection _spoils = new CardCollection();
         #endregion
 
         #region Properties
@@ -39,7 +39,11 @@ namespace GameOfWarOOP
 
         public PlayingCard ActiveSpoil
         {
-            get { return _spoils.TopCard; }
+            get 
+            {
+                int index = _spoils.Count - 1;
+                return _spoils.ViewCardAt(index); 
+            }
         }
 
         public int Score

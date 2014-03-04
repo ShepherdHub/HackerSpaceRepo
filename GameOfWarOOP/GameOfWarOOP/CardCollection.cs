@@ -51,6 +51,7 @@ namespace GameOfWarOOP
         public void AddCardCollection(CardCollection collec)
         {
             _cards.AddRange(collec._cards);
+            collec.Clear();
         }
 
         public PlayingCard RemoveCard()
@@ -92,6 +93,13 @@ namespace GameOfWarOOP
         public void Clear()
         {
             _cards.Clear();
+        }
+
+        public PlayingCard ViewCardAt(int index)
+        {
+            if(index < _cards.Count && index >= 0) return _cards[index];
+            Console.WriteLine("Attempted to view card at invalid index: " + index);
+            return null;
         }
 
         private void Swap(int a, int b)

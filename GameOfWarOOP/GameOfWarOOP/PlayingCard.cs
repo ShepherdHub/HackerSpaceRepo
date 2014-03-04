@@ -32,8 +32,8 @@ namespace GameOfWarOOP
 
         public PlayingCard(int card)
         {
-            _rank = card/13;
-            _suit = card%13;
+            _rank = card%13;
+            _suit = card/13;
             _fullName = PrintRank() + " of " + PrintSuit();
             _isFaceUp = false;
         }
@@ -47,7 +47,7 @@ namespace GameOfWarOOP
         {
             if (_rank <= 8)
             {
-                return _rank +"";
+                return _rank + 2 + "";
             }
             else
             {
@@ -91,5 +91,11 @@ namespace GameOfWarOOP
             if (this._rank > other._rank) return 1;
             return 0;
         }
+
+        public override string ToString()
+        {
+            return _fullName;
+        }
+        
     }
 }
